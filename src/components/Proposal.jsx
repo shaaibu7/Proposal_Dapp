@@ -12,6 +12,17 @@ const Proposal = ({
     executed,
 }) => {
     const { voteForProposal } = useProposalAction();
+    const presentTime = Date.now();
+
+    const proposalStatus = () => {
+        if(voteCount >= minRequiredVote) {
+            if(presentTime > deadline) {
+                return { data: "Execute" };
+            }
+        }
+        if(executed) return { data: "Completed" };
+        
+    }
     return (
         <Box className="bg-slate-400 rounded-md shadow-sm p-4 w-96">
             <Text className="text-2xl mb-4">Proposals</Text>
